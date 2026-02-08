@@ -1,24 +1,23 @@
-# Habitica CSV Importer
+# Habitica TUI 🎮
 
-A simple Python script to bulk import tasks into [Habitica](https://habitica.com) from a CSV file.
+A Ranger-inspired terminal user interface for managing your Habitica tasks.
+
+![Habitica TUI Interface](https://github.com/freddyfernando/habitica-tui/raw/main/screenshot_placeholder.png) *(Add a real screenshot later)*
 
 ## Features
 
-- **Bulk Import**: Import Habits, Dailies, and Todos.
-- **Rate Limiting**: Automatically handles Habitica's API rate limits (429 errors) with exponential backoff.
-- **Customizable**: Map your CSV columns to Habitica task attributes.
-
-## Prerequisites
-
-- Python 3.6+
-- A Habitica account
+- **3-Column Ranger Layout**: Efficient navigation between Categories (left), Task List (center), and Task Details (right).
+- **Vim-style Controls**: Navigate with `h/j/k/l`.
+- **Interactive Management**: Score, Edit, and Delete tasks directly from the terminal.
+- **Robust Import**: Sync tasks from YAML, Markdown (Obsidian checklist style), or CSV.
+- **Rich Visuals**: Color-coded task list reflecting task health and Markdown-rendered detail previews.
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/freddyfernando/habitica-importer.git
-   cd habitica-importer
+   git clone https://github.com/freddyfernando/habitica-tui.git
+   cd habitica-tui
    ```
 
 2. Install dependencies:
@@ -26,32 +25,33 @@ A simple Python script to bulk import tasks into [Habitica](https://habitica.com
    pip install -r requirements.txt
    ```
 
+3. Set up your credentials:
+   Create a `.env` file or export the following variables:
+   ```bash
+   export HABITICA_USER_ID="your-user-id"
+   export HABITICA_API_TOKEN="your-api-token"
+   ```
+
 ## Usage
 
-1. **Prepare your CSV**:
-   Create a CSV file named `habitica-import.csv` (or use the provided `habitica_import_example.csv` as a template).
-   
-   **Format:**
-   ```csv
-   Type,Task Name,Notes,Priority
-   Habit,Drink Water,Health: 8 glasses,1.5
-   Daily,Check Email,Work,1
-   Todo,Finish Report,Due Friday,2
-   ```
+Run the TUI:
+```bash
+python habitica-importer.py
+```
 
-   - **Type**: `Habit`, `Daily`, or `Todo` (case-insensitive)
-   - **Task Name**: The title of the task
-   - **Notes**: Extra details (optional)
-   - **Priority**: Difficulty level (0.1 = Trivial, 1 = Easy, 1.5 = Medium, 2 = Hard)
+### Shortcuts
 
-2. **Run the script**:
-   ```bash
-   python3 habitica-importer.py
-   ```
-
-3. **Enter Credentials**:
-   The script will ask for your **User ID** and **API Token**. You can find these in your [Habitica Settings > API](https://habitica.com/user/settings/api).
+| Key | Action |
+|-----|--------|
+| `j`/`k` | Move up/down in lists |
+| `h`/`l` | Switch focus between panes |
+| `s` | Score task UP (+) |
+| `x` | Score task DOWN (-) |
+| `e` | Edit task details |
+| `d` | Delete task |
+| `i` | Import from file (CSV/YAML/MD) |
+| `r` | Refresh task list |
+| `q` | Quit |
 
 ## License
-
 MIT
